@@ -40,4 +40,14 @@ class MessageResolver(private val messageRepository: MessageRepository) {
         messageRepository.messages[id] = newMessage
         return newMessage
     }
+
+    @MutationMapping
+    fun deleteMessage(@Argument id: String): Message {
+        val message = messageRepository.messages[id]
+        if (message == null) {
+            throw IllegalArgumentException("Message not found")
+        }
+        messageRepository.messages.remove(id)
+        return message
+    }
 }
