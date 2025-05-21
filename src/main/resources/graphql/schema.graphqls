@@ -12,6 +12,7 @@ type Message {
 type Query {
     getMessage(id: ID!): Message
     getMessages: [Message]
+    searchMessages(author: String, content: String): [Message]
 }
 
 type Mutation {

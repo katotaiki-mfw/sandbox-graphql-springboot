@@ -21,6 +21,17 @@ class MessageResolver(private val messageRepository: MessageRepository) {
         return messageRepository.messages.values.toList()
     }
 
+    @QueryMapping
+    fun searchMessages(
+        @Argument author: String?, 
+        @Argument content: String?
+    ): List<Message> {
+        return messageRepository.messages.values.filter { message ->
+            (author.isNullOrBlank() || message.author.contains(author, ignoreCase = true)) &&
+            (content.isNullOrBlank() || message.content.contains(content, ignoreCase = true))
+        }
+    }
+
     @MutationMapping
     fun createMessage(@Argument input: MessageInput): Message {
         val id = UUID.randomUUID().toString()
