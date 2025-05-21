@@ -12,7 +12,7 @@ import org.springframework.graphql.data.method.annotation.Argument
 @Controller
 class MessageResolver(private val messageRepository: MessageRepository) {
     @QueryMapping
-    fun getMessage(id: String): Message? {
+    fun getMessage(@Argument id: String): Message? {
         return messageRepository.messages[id]
     }
 
