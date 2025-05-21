@@ -11,6 +11,7 @@ type Message {
 
 type Query {
     getMessage(id: ID!): Message
+    getMessages: [Message]
 }
 
 type Mutation {

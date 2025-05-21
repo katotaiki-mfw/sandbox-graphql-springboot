@@ -16,6 +16,11 @@ class MessageResolver(private val messageRepository: MessageRepository) {
         return messageRepository.messages[id]
     }
 
+    @QueryMapping
+    fun getMessages(): List<Message> {
+        return messageRepository.messages.values.toList()
+    }
+
     @MutationMapping
     fun createMessage(@Argument input: MessageInput): Message {
         val id = UUID.randomUUID().toString()
